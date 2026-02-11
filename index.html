@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính Lương One-Page 2026 - Cập nhật Luật 109/2025/QH15</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2534/2534204.png">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo-area">
+            <div class="logo-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7 7H17" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7 12H17" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7 17H13" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div>
+                <h1 class="app-title">Tính Lương One-Page 2026</h1>
+                <span class="app-subtitle">● Cập nhật Luật 109/2025/QH15</span>
+            </div>
+        </div>
+        <div class="top-links">
+            <a href="#">Hướng dẫn</a>
+            <a href="#">Quy định 2026</a>
+            <button class="lang-btn">🌐 Tiếng Việt</button>
+        </div>
+    </div>
+
+    <main class="main-container">
+        <!-- Left Column: Input -->
+        <section class="card input-card">
+            <div class="card-header">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <h2>Thông tin đầu vào</h2>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" id="tab-gross-net">Gross &rarr; Net</button>
+                <button class="tab-btn" id="tab-net-gross">Net &rarr; Gross</button>
+            </div>
+
+            <div class="form-group">
+                <label>Lương tháng (VND)</label>
+                <div class="input-wrapper">
+                    <input type="text" id="salary-input" value="35,000,000">
+                    <span class="suffix">đ</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Người phụ thuộc</label>
+                <div class="counter-wrapper">
+                    <button class="counter-btn" id="dep-minus">−</button>
+                    <input type="number" id="dependents-input" value="0" readonly>
+                    <button class="counter-btn" id="dep-plus">+</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Vùng (Lương tối thiểu)</label>
+                <div class="region-selector">
+                    <button class="region-btn active" data-region="1">I</button>
+                    <button class="region-btn" data-region="2">II</button>
+                    <button class="region-btn" data-region="3">III</button>
+                    <button class="region-btn" data-region="4">IV</button>
+                </div>
+                <div class="region-note" id="region-note">Vùng I: 5.310.000đ (HN, TP.HCM)</div>
+            </div>
+
+            <div class="form-group toggle-group">
+                <div class="toggle-row">
+                    <label>Người nước ngoài (Expat)</label>
+                    <label class="switch">
+                        <input type="checkbox" id="expat-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="toggle-row">
+                    <label>Đang thử việc (Probation)</label>
+                    <label class="switch">
+                        <input type="checkbox" id="probation-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+
+            <button class="calculate-btn" id="calc-btn">Tính toán ngay &rarr;</button>
+        </section>
+
+        <!-- Middle Column: Summary -->
+        <div class="middle-column">
+            <section class="card summary-card">
+                <div class="net-display">
+                    <div class="label">LƯƠNG THỰC NHẬN (NET INCOME)</div>
+                    <div class="amount" id="net-result">29.412.500</div>
+                    <div class="unit">VND / Tháng</div>
+                </div>
+
+                <div class="chart-area">
+                    <div class="donut-chart-container">
+                        <div class="donut-chart" id="salary-chart">
+                            <div class="chart-center-text">
+                                <span class="chart-label">Tỷ lệ Net</span>
+                                <span class="chart-value" id="net-percent">84%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item"><span class="dot net"></span>Thực nhận</div>
+                        <div class="legend-item"><span class="dot ins"></span>Bảo hiểm</div>
+                        <div class="legend-item"><span class="dot tax"></span>Thuế TNCN</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card tax-bracket-card">
+                <div class="card-header-small">
+                    <h3>Bậc Thuế TNCN (Luật Mới)</h3>
+                    <span class="badge" id="tax-bracket-badge">Bậc 2/5</span>
+                </div>
+                <div class="bracket-slider">
+                    <div class="slider-track">
+                        <div class="slider-fill" id="bracket-fill" style="width: 40%"></div>
+                    </div>
+                    <div class="slider-labels">
+                        <span>5%</span>
+                        <span>10%</span>
+                        <span>20%</span>
+                        <span>30%</span>
+                        <span>35%</span>
+                    </div>
+                    <div class="slider-dots">
+                        <div class="dot active"></div>
+                        <div class="dot active"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+                <div class="bracket-note" id="bracket-note">Thu nhập tính thuế nằm trong khoảng 10tr - 30tr VND.</div>
+            </section>
+        </div>
+
+        <!-- Right Column: Details -->
+        <section class="card details-card">
+            <div class="card-header">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2"><path d="M12 20V10M18 20V4M6 20v-4"></path></svg>
+                <h2>Chi tiết lương</h2>
+                <a href="#" class="expand-link">Mở rộng bảng</a>
+            </div>
+
+            <div class="detail-table">
+                <div class="d-row header">
+                    <span>Khoản mục</span>
+                    <span>Chi tiết</span>
+                    <span>Số tiền (VND)</span>
+                </div>
+
+                <div class="d-row main">
+                    <span>Lương Gross</span>
+                    <span>-</span>
+                    <span class="bold" id="detail-gross">35,000,000</span>
+                </div>
+
+                <div class="section-title">BẢO HIỂM (NV ĐÓNG)</div>
+                <div class="d-row">
+                    <span>BHXH</span>
+                    <span>8% (Max 46.8tr)</span>
+                    <span id="detail-bhxh">2,800,000</span>
+                </div>
+                <div class="d-row">
+                    <span>BHYT</span>
+                    <span>1.5% (Max 46.8tr)</span>
+                    <span id="detail-bhyt">525,000</span>
+                </div>
+                <div class="d-row">
+                    <span>BHTN</span>
+                    <span id="detail-bhtn-rate">1% (Vùng I)</span>
+                    <span id="detail-bhtn">350,000</span>
+                </div>
+
+                <div class="section-title">THUẾ TNCN</div>
+                <div class="d-row">
+                    <span>Thu nhập trước thuế</span>
+                    <span>Gross - BH</span>
+                    <span id="detail-pretax">31,325,000</span>
+                </div>
+                <div class="d-row">
+                    <span>Giảm trừ bản thân</span>
+                    <span>Luật mới</span>
+                    <span class="green" id="detail-personal">-15,500,000</span>
+                </div>
+                <div class="d-row">
+                    <span>Giảm trừ phụ thuộc</span>
+                    <span id="detail-dep-count">0 người</span>
+                    <span class="green" id="detail-dependent">0</span>
+                </div>
+                <div class="d-row highlight-bg">
+                    <span>Thu nhập tính thuế</span>
+                    <span></span>
+                    <span class="bold" id="detail-taxable">17,325,000</span>
+                </div>
+                <div class="d-row blue-text">
+                    <span>Thuế TNCN phải nộp</span>
+                    <span id="detail-tax-level">Bậc 2</span>
+                    <span class="bold" id="detail-tax">1,232,500</span>
+                </div>
+            </div>
+
+            <div class="collapsible-section">
+                <button class="collapsible-btn" id="toggle-tax-details">
+                    Chi tiết công thức thuế 5 bậc (2026)
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="collapsible-content" id="tax-details-content">
+                    <!-- Dynamic content filled by JS -->
+                </div>
+                <div class="total-tax-row">
+                    <span>Tổng thuế</span>
+                    <span class="blue-bold" id="detail-total-tax">1,232,500</span>
+                </div>
+            </div>
+
+            <div class="employer-cost-footer">
+                <span>Tổng chi phí công ty (Employer Cost)</span>
+                <span class="amount" id="employer-cost">42,525,000 VND</span>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-actions">
+        <p class="footer-note">Hệ thống tính toán tuân thủ Nghị định chính phủ và Luật Thuế TNCN sửa đổi 2025.<br>Tham khảo: <a href="#">Văn bản Luật 109/2025/QH15</a></p>
+        <div class="action-buttons">
+            <button class="btn-outline">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"></path><path d="M16 6l-4-4-4 4"></path><path d="M12 2v13"></path></svg>
+                Chia sẻ
+            </button>
+            <button class="btn-green">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path></svg>
+                Tải bảng tính Excel
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
